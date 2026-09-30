@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web Interface Projects • Mariyappan | Live Lab Showcase</title>
+  <meta name="description" content="A comprehensive portfolio of 10 modern web engineering projects spanning Units 1 through 5, built with HTML5, CSS3, JavaScript, React 19, and Vite.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-primary: #090d16;
+      --bg-secondary: #0f172a;
+      --bg-card: rgba(17, 24, 39, 0.75);
+      --bg-card-hover: rgba(30, 41, 59, 0.85);
+      --border-color: rgba(255, 255, 255, 0.08);
+      --border-hover: rgba(99, 102, 241, 0.4);
+      --primary: #6366f1;
+      --primary-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+      --accent-cyan: #06b6d4;
+      --accent-emerald: #10b981;
+      --accent-amber: #f59e0b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-subtle: #64748b;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --font-heading: 'Outfit', sans-serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+      --shadow-glow: 0 0 35px -5px rgba(99, 102, 241, 0.25);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      line-height: 1.6;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Ambient background lighting */
+    .ambient-glow {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .glow-blob-1 {
+      position: absolute;
+      top: -10%;
+      left: 15%;
+      width: 550px;
+      height: 550px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.16) 0%, transparent 70%);
+      filter: blur(60px);
+    }
+    .glow-blob-2 {
+      position: absolute;
+      top: 35%;
+      right: -5%;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(236, 72, 153, 0.12) 0%, transparent 70%);
+      filter: blur(70px);
+    }
+    .glow-blob-3 {
+      position: absolute;
+      bottom: -10%;
+      left: 30%;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(6, 182, 212, 0.12) 0%, transparent 70%);
+      filter: blur(80px);
+    }
+
+    /* Layout wrapper */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Header & Navigation */
+    header.site-header {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border-color);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(9, 13, 22, 0.75);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: inherit;
+    }
+    .brand-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: var(--primary-gradient);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.35);
+    }
+    .brand-text h1 {
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    .brand-text span {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      display: block;
+    }
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .badge-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 9999px;
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: #34d399;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+    .status-pulse {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 10px #10b981;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(1.3); }
+    }
+    .btn-github {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: var(--radius-sm);
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .btn-github:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-1px);
+    }
+    .btn-github svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 70px 0 40px;
+      text-align: center;
+    }
+    .pill-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: 9999px;
+      background: rgba(99, 102, 241, 0.12);
+      border: 1px solid rgba(99, 102, 241, 0.28);
+      color: #a5b4fc;
+      font-size: 0.82rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .hero-title {
+      font-family: var(--font-heading);
+      font-size: clamp(2.3rem, 5vw, 3.8rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 20px;
+    }
+    .gradient-text {
+      background: var(--primary-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+    .hero-subtitle {
+      max-width: 720px;
+      margin: 0 auto 36px;
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    
+    /* Stats Bar */
+    .stats-row {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      margin-bottom: 48px;
+    }
+    .stat-pill {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      backdrop-filter: blur(8px);
+    }
+    .stat-num {
+      font-family: var(--font-heading);
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-align: left;
+    }
+
+    /* Filter Toolbar */
+    .toolbar {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      margin-bottom: 40px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+    }
+    .search-box {
+      position: relative;
+      margin-bottom: 18px;
+    }
+    .search-box svg {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 18px;
+      height: 18px;
+      stroke: var(--text-subtle);
+      fill: none;
+      stroke-width: 2;
+    }
+    .search-input {
+      width: 100%;
+      padding: 14px 18px 14px 48px;
+      border-radius: var(--radius-md);
+      background: rgba(2, 6, 23, 0.7);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      font-size: 0.95rem;
+      font-family: inherit;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+    .search-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+    }
+    .search-input::placeholder {
+      color: var(--text-subtle);
+    }
+
+    .filter-pills {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .filter-btn {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 7px 15px;
+      border-radius: 9999px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+    .filter-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-main);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+    .filter-btn.active {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.35);
+    }
+
+    /* Projects Grid */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(370px, 1fr));
+      gap: 26px;
+      margin-bottom: 70px;
+    }
+    @media (max-width: 480px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Project Card */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 26px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      backdrop-filter: blur(14px);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--primary-gradient);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: var(--border-hover);
+      background: var(--bg-card-hover);
+      box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.5), var(--shadow-glow);
+    }
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+    .unit-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      background: rgba(99, 102, 241, 0.12);
+      border: 1px solid rgba(99, 102, 241, 0.25);
+      color: #a5b4fc;
+    }
+    .unit-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #818cf8;
+    }
+    .card-icon {
+      font-size: 2rem;
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card-title {
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      line-height: 1.3;
+      color: #ffffff;
+    }
+    .card-desc {
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      line-height: 1.55;
+      margin-bottom: 20px;
+      flex-grow: 1;
+    }
+
+    .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 24px;
+    }
+    .tech-tag {
+      font-size: 0.74rem;
+      font-weight: 600;
+      padding: 4px 8px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      color: #cbd5e1;
+    }
+
+    .card-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .btn-launch {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 9px 14px;
+      border-radius: var(--radius-sm);
+      background: var(--primary);
+      color: #ffffff;
+      font-size: 0.84rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-launch:hover {
+      background: #4f46e5;
+      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
+    }
+    .btn-preview {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 9px 14px;
+      border-radius: var(--radius-sm);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      font-size: 0.84rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+    .btn-preview:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Modal / Preview Overlay */
+    .modal-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(4, 7, 14, 0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      animation: fadeIn 0.2s ease;
+    }
+    .modal-backdrop.active {
+      display: flex;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .modal-window {
+      background: #0f172a;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 1200px;
+      height: 88vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+      overflow: hidden;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .modal-window.view-tablet {
+      max-width: 768px;
+    }
+    .modal-window.view-mobile {
+      max-width: 400px;
+    }
+
+    .modal-header {
+      padding: 14px 20px;
+      background: #1e293b;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .modal-title-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+    .modal-title {
+      font-family: var(--font-heading);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #ffffff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .modal-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .view-btn {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-muted);
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-family: inherit;
+    }
+    .view-btn.active, .view-btn:hover {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+    .btn-close-modal {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: #ef4444;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.1rem;
+      transition: all 0.2s ease;
+    }
+    .btn-close-modal:hover {
+      background: #ef4444;
+      color: #ffffff;
+    }
+
+    .modal-iframe-container {
+      flex: 1;
+      width: 100%;
+      height: 100%;
+      background: #ffffff;
+      position: relative;
+    }
+    .modal-iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* Footer */
+    footer.site-footer {
+      border-top: 1px solid var(--border-color);
+      padding: 40px 0;
+      text-align: center;
+      color: var(--text-subtle);
+      font-size: 0.85rem;
+    }
+    footer.site-footer a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+    footer.site-footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="ambient-glow">
+    <div class="glow-blob-1"></div>
+    <div class="glow-blob-2"></div>
+    <div class="glow-blob-3"></div>
+  </div>
+
+  <header class="site-header">
+    <div class="container nav-inner">
+      <a href="#" class="brand-group">
+        <div class="brand-icon">⚡</div>
+        <div class="brand-text">
+          <h1>Web Interface Projects</h1>
+          <span>Academic Laboratory Portfolio • Mariyappan</span>
+        </div>
+      </a>
+      <div class="nav-actions">
+        <div class="badge-status">
+          <span class="status-pulse"></span>
+          10 Projects Live
+        </div>
+        <a href="https://github.com/mariak146200/WEB_INTERFACE-_PROJECT" target="_blank" rel="noopener noreferrer" class="btn-github">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+          Repository
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="pill-badge">Computer Science & Engineering • Web Interface Lab</div>
+      <h2 class="hero-title">
+        Modern Web Engineering &amp; <br>
+        <span class="gradient-text">Interactive Applications</span>
+      </h2>
+      <p class="hero-subtitle">
+        Explore a curated laboratory suite spanning 5 core curriculum units. From foundational HTML5/DOM manipulation to modern component-driven single page applications in React 19 and Vite.
+      </p>
+
+      <div class="stats-row">
+        <div class="stat-pill">
+          <div class="stat-num">10</div>
+          <div class="stat-label">Total Projects</div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-num">5</div>
+          <div class="stat-label">Syllabus Units</div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-num">React 19</div>
+          <div class="stat-label">Core Engine</div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-num">100%</div>
+          <div class="stat-label">Live Deployment</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Filter & Search Toolbar -->
+    <section class="toolbar">
+      <div class="search-box">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" id="searchInput" class="search-input" placeholder="Search projects by name, unit, technology (e.g. counter, calculator, attendance, portfolio)..." autocomplete="off">
+      </div>
+      <div class="filter-pills" id="filterPills">
+        <button class="filter-btn active" data-filter="all">All Projects (10)</button>
+        <button class="filter-btn" data-filter="unit-1">Unit 1</button>
+        <button class="filter-btn" data-filter="unit-2">Unit 2</button>
+        <button class="filter-btn" data-filter="unit-3">Unit 3</button>
+        <button class="filter-btn" data-filter="unit-4">Unit 4</button>
+        <button class="filter-btn" data-filter="unit-5">Unit 5</button>
+        <button class="filter-btn" data-filter="react">React 19 (8)</button>
+        <button class="filter-btn" data-filter="vanilla">Vanilla JS (2)</button>
+      </div>
+    </section>
+
+    <!-- Projects Grid -->
+    <section class="grid" id="projectsGrid">
+      
+      <!-- Unit 1 Project 1 -->
+      <article class="card" data-unit="unit-1" data-type="vanilla" data-title="Interactive Counter App" data-tags="HTML5 CSS3 JavaScript DOM State">
+        <div>
+          <div class="card-top">
+            <div class="unit-badge"><span class="unit-dot"></span> Unit 1 • Project 1</div>
+            <div class="card-icon">⚡</div>
+          </div>
+          <h3 class="card-title">Interactive Counter App</h3>
+          <p class="card-desc">Stateful numerical increment and decrement engine featuring zero-reset capability, clean DOM event manipulation, and custom color-coded button feedback.</p>
+          <div class="tech-tags">
+            <span class="tech-tag">HTML5</span>
+            <span class="tech-tag">CSS3</span>
+            <span class="tech-tag">Vanilla JS</span>
+            <span class="tech-tag">DOM State</span>
+          </div>
+        </div>
+        <div class="card-actions">
+          <a href="projects/unit-1-pro-1/index.html" class="btn-launch" target="_blank">Launch App ↗</a>
+          <button class="btn-preview" onclick="openPreview('projects/unit-1-pro-1/index.html', 'Unit 1 Project 1: Counter App')">Quick Preview</button>
+        </div>
+      </article>
+
+      <!-- Unit 1 Project 2 -->
+      <article class="card" data-unit="unit-1" data-type="vanilla" data-title="Student Profile Card & Grade Evaluator" data-tags="HTML5 CSS3 Form Validation Grade Logic">
+        <div>
+          <div class="card-top">
+            <div class="unit-badge"><span class="unit-dot"></span> Unit 1 • Project 2</div>
+            <div class="card-icon">🎓</div>
+          </div>
+          <h3 class="card-title">Student Profile &amp; Grade Evaluator</h3>
+          <p class="card-desc">Dynamic student profile badge generator. Evaluates numerical input marks against academic thresholds to compute instantaneous letter grades (A, B, C, F).</p>
+          <div class="tech-tags">
+            <span class="tech-tag">HTML5 Forms</span>
+            <span class="tech-tag">Grade Calculation</span>
+            <span class="tech-tag">DOM Manipulation</span>
+          </div>
+        </div>
+        <div class="card-actions">
+          <a href="projects/unit-1-pro-2/index.html" class="btn-launch" target="_blank">Launch App ↗</a>
+          <button class="btn-preview" onclick="openPreview('projects/unit-1-pro-2/index.html', 'Unit 1 Project 2: Student Profile Card')">Quick Preview</button>
+        </div>
+      </article>
+
+      <!-- Unit 2 Project 1 -->
+      <article class="card" data-unit="unit-2" data-type="react" data-title="Developer Portfolio - Jai" data-tags="React 19 Vite Component Hierarchy Props">
+        <div>
+          <div class="card-top">
+            <div class="unit-badge"><span class="unit-dot"></span> Unit 2 • Project 1</div>
+            <div class="card-icon">💼</div>
+          </div>
+          <h3 class="card-title">Developer Portfolio - Jai</h3>
+          <p class="card-desc">Decomposed React component hierarchy demonstrating header props, biography cards, dynamic skill list mapping, career goals, and styled contact forms.</p>
+          <div class="tech-tags">
+            <span class="tech-tag">React 19</span>
+            <span class="tech-tag">Vite</span>
+            <span class="tech-tag">Component Props</span>
+            <span class="tech-tag">Modular CSS</span>
+          </div>
+        </div>
+        <div class="card-actions">
+          <a href="projects/unit-2-pro-1/index.html" class="btn-launch" target="_blank">Launch App ↗</a>
+          <button class="btn-preview" onclick="openPreview('projects/unit-2-pro-1/index.html', 'Unit 2 Project 1: Developer Portfolio')">Quick Preview</button>
+        </div>
+      </article>
+
+      <!-- Unit 2 Project 2 -->
+      <article class="card" data-unit="unit-2" data-type="react" data-title="Hobby & Interest Gallery" data-tags="React 19 Vite Asset Bundling Grid UI">
+        <div>
+          <div class="card-top">
+            <div class="unit-badge"><span class="unit-dot"></span> Unit 2 • Project 2</div>
+            <div class="card-icon">🎨</div>
+          </div>
+          <h3 class="card-title">Hobby &amp; Interest Gallery</h3>
+          <p class="card-desc">Interactive hobbies explorer with dynamic image importing for Photography, Music, Reading, Cooking, Travel, and Drawing with responsive gallery grids.</p>
+          <div class="tech-tags">
+            <span class="tech-tag">React 19</span>
+            <span class="tech-tag">Vite Assets</span>
+            <span class="tech-tag">Media Grid</span>
+            <span class="tech-tag">UI Animation</span>
+          </div>
+        </div>
+        <div class="card-actions">
+          <a href="projects/unit-2-pro-2/index.html" class="btn-launch" target="_blank">Launch App ↗</a>
+          <button class="btn-preview" onclick="openPreview('projects/unit-2-pro-2/index.html', 'Unit 2 Project 2: Hobby Explorer')">Quick Preview</button>
+        </div>
+      </article>
+
+      <!-- Unit 3 Project 1 -->
+      <article class="card" data-unit="unit-3" data-type="react" data-title="Digital Responsive Calculator" data-tags="React 19 Vite useState State Management Arithmetic">
+        <div>
+          <div class="card-top">
+            <div class="unit-badge"><span class="unit-dot"></span> Unit 3 • Project 1</div>
+            <div class="card-icon">🧮</div>
+          </div>
+          <h3 class="card-title">Digital Responsive Calculator</h3>
+          <p class="card-desc">Interactive arithmetic processing engine with chained calculation handling, decimal management, state resets, and clean neumorphic responsive controls.</p>
+          <div class="tech-tags">
+            <span class="tech-tag">React 19</span>
+            <span class="tech-tag">useState</span>
+            <span class="tech-tag">Math Engine</span>
+            <span class="tech-tag">Event Delegation</span>
+          </div>
+        </div>
+        <div class="card-actions">
+          <a href="projects/unit-3-pro-1/index.html" class="btn-launch" target="_blank">Launch App ↗</a>
+          <button class="btn-preview" onclick="openPreview('projects/unit-3-pro-1/index.html', 'Unit 3 Project 1: Calculator App')">Quick Preview</button>
+        </div>
+      </article>
+
+      <!-- Unit 3 Project 2 -->
+      <article class="card" data-unit="unit-3" data-type="react" data-title="Student Attendance Tracker" data-tags="React 19 Vite Array State Metrics Realtime">
+        <div>
+          <div class="card-top">
+            <div class="unit-badge"><span class="unit-dot"></span> Unit 3 • Project 2</div>
+            <div class="card-icon">📋</div>
+          </div>
+          <h3 class="card-title">Student Attendance Tracker</h3>
+          <p class="card-desc">20-student live roll call management suite. Features one-click present/absent toggling, aggregate attendance counters, and live metric tracking.</p>
+          <div class="tech-tags">
+            <span class="tech-tag">React 19</span>
+            <span class="tech-tag">Immutable State</span>
+            <span class="tech-tag">Class Analytics</span>
+            <span class="tech-tag">Live Roster</span>
+          </div>
+        </div>
+        <div class="card-actions">
+          <a href="projects/unit-3-pro-2/index.html" class="btn-launch" target="_blank">Launch App ↗</a>
+          <button class="btn-preview" onclick="openPreview('projects/unit-3-pro-2/index.html', 'Unit 3 Project 2: Attendance Tracker')">Quick Preview</button>
+        </div>
+      </article>
+
+      <!-- Unit 4 Project 1 -->
+      <article class="card" data-unit="unit-4" data-type="react" data-title="Form Validation & Auth Gate" data-tags="React 19 React Router Regex Form Validation">
+        <div>
+          <div class="card-top">
+            <div class="unit-badge"><span class="unit-dot"></span> Unit 4 • Project 1</div>
+            <div class="card-icon">🔒</div>
+          </div>
+          <h3 class="card-title">Form Validation &amp; Auth Gate</h3>
+          <p class="card-desc">Comprehensive client-side security form. Implements regex validation for usernames, emails, and passwords with dynamic error dispatching and route protection.</p>
+          <div class="tech-tags">
+            <span class="tech-tag">React 19</span>
+            <span class="tech-tag">React Router</span>
+            <span class="tech-tag">Regex Engine</span>
+            <span class="tech-tag">Route Guard</span>
+          </div>
+        </div>
+        <div class="card-actions">
+          <a href="projects/unit-4-pro-1/index.html" class="btn-launch" target="_blank">Launch App ↗</a>
+          <button class="btn-preview" onclick="openPreview('projects/unit-4-pro-1/index.html', 'Unit 4 Project 1: Form Validation')">Quick Preview</button>
+        </div>
+      </article>
+
+      <!-- Unit 4 Project 2 -->
+      <article class="card" data-unit="unit-4" data-type="react" data-title="Personal Portfolio - Mariyappan" data-tags="React 19 Vite Portfolio CSS Animations Responsive">
+        <div>
+          <div class="card-top">
+            <div class="unit-badge"><span class="unit-dot"></span> Unit 4 • Project 2</div>
+            <div class="card-icon">🚀</div>
+          </div>
+          <h3 class="card-title">Personal Portfolio - Mariyappan</h3>
+          <p class="card-desc">Full-featured personal brand website showcasing developer bio, animated skill progress meters, project gallery, education history, and interactive contact channels.</p>
+          <div class="tech-tags">
+            <span class="tech-tag">React 19</span>
+            <span class="tech-tag">Full Portfolio</span>
+            <span class="tech-tag">Hero UI</span>
+            <span class="tech-tag">Interactive Design</span>
+          </div>
+        </div>
+        <div class="card-actions">
+          <a href="projects/unit-4-pro-2/index.html" class="btn-launch" target="_blank">Launch App ↗</a>
+          <button class="btn-preview" onclick="openPreview('projects/unit-4-pro-2/index.html', 'Unit 4 Project 2: Mariyappan Portfolio')">Quick Preview</button>
+        </div>
+      </article>
+
+      <!-- Unit 5 Project 1 -->
+      <article class="card" data-unit="unit-5" data-type="react" data-title="Student Academic Portal & SGPA Report" data-tags="React 19 React Router SGPA CGPA GPA Calculator Data Table">
+        <div>
+          <div class="card-top">
+            <div class="unit-badge"><span class="unit-dot"></span> Unit 5 • Project 1</div>
+            <div class="card-icon">📊</div>
+          </div>
+          <h3 class="card-title">Student Academic &amp; SGPA Portal</h3>
+          <p class="card-desc">Multi-semester academic progress evaluator. Calculates course credits, grade points, Semester Grade Point Average (SGPA), and cumulative CGPA across 3 semesters.</p>
+          <div class="tech-tags">
+            <span class="tech-tag">React 19</span>
+            <span class="tech-tag">React Router</span>
+            <span class="tech-tag">SGPA / CGPA Engine</span>
+            <span class="tech-tag">Multi-Page App</span>
+          </div>
+        </div>
+        <div class="card-actions">
+          <a href="projects/unit-5-pro-1/index.html" class="btn-launch" target="_blank">Launch App ↗</a>
+          <button class="btn-preview" onclick="openPreview('projects/unit-5-pro-1/index.html', 'Unit 5 Project 1: Academic Portal')">Quick Preview</button>
+        </div>
+      </article>
+
+      <!-- Unit 5 Project 2 -->
+      <article class="card" data-unit="unit-5" data-type="react" data-title="TaskFlow - Productivity & Task Suite" data-tags="React 19 LocalStorage Task Management Notifications Dashboard">
+        <div>
+          <div class="card-top">
+            <div class="unit-badge"><span class="unit-dot"></span> Unit 5 • Project 2</div>
+            <div class="card-icon">✅</div>
+          </div>
+          <h3 class="card-title">TaskFlow - Productivity Suite</h3>
+          <p class="card-desc">Advanced task management application with priority classifications (High, Medium, Low), persistent browser LocalStorage, dynamic statistics dashboard, and toast notifications.</p>
+          <div class="tech-tags">
+            <span class="tech-tag">React 19</span>
+            <span class="tech-tag">LocalStorage</span>
+            <span class="tech-tag">Stats Dashboard</span>
+            <span class="tech-tag">Toast Alerts</span>
+          </div>
+        </div>
+        <div class="card-actions">
+          <a href="projects/unit-5-pro-2/index.html" class="btn-launch" target="_blank">Launch App ↗</a>
+          <button class="btn-preview" onclick="openPreview('projects/unit-5-pro-2/index.html', 'Unit 5 Project 2: TaskFlow')">Quick Preview</button>
+        </div>
+      </article>
+
+    </section>
+  </main>
+
+  <!-- Interactive Live Preview Modal -->
+  <div class="modal-backdrop" id="previewModal">
+    <div class="modal-window" id="modalWindow">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <span style="font-size: 1.2rem;">🖥️</span>
+          <span class="modal-title" id="modalTitle">Project Live Preview</span>
+        </div>
+        <div class="modal-controls">
+          <button class="view-btn active" onclick="setModalView('desktop')">Desktop</button>
+          <button class="view-btn" onclick="setModalView('tablet')">Tablet</button>
+          <button class="view-btn" onclick="setModalView('mobile')">Mobile</button>
+          <button class="view-btn" onclick="reloadPreview()" title="Reload preview">↻</button>
+          <a href="#" id="modalDirectLink" target="_blank" class="view-btn" title="Open full screen in new tab">↗ New Tab</a>
+          <button class="btn-close-modal" onclick="closePreview()" title="Close (Esc)">✕</button>
+        </div>
+      </div>
+      <div class="modal-iframe-container">
+        <iframe id="modalIframe" class="modal-iframe" src="" title="Live Project Preview"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Web Interface Lab Showcase • Designed &amp; Developed for Academic Evaluation • <strong>Mariyappan</strong></p>
+      <p style="margin-top: 8px; opacity: 0.7;">Engineered with Vanilla CSS, React 19, Vite, and GitHub Actions</p>
+    </div>
+  </footer>
+
+  <script>
+    // Search and Filter Functionality
+    const searchInput = document.getElementById('searchInput');
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.card');
+
+    let currentFilter = 'all';
+    let searchQuery = '';
+
+    function filterCards() {
+      cards.forEach(card => {
+        const unit = card.getAttribute('data-unit');
+        const type = card.getAttribute('data-type');
+        const title = card.getAttribute('data-title').toLowerCase();
+        const tags = card.getAttribute('data-tags').toLowerCase();
+        const desc = card.querySelector('.card-desc').textContent.toLowerCase();
+
+        const matchesSearch = !searchQuery || 
+          title.includes(searchQuery) || 
+          tags.includes(searchQuery) || 
+          desc.includes(searchQuery);
+
+        let matchesFilter = false;
+        if (currentFilter === 'all') matchesFilter = true;
+        else if (currentFilter === 'unit-1') matchesFilter = (unit === 'unit-1');
+        else if (currentFilter === 'unit-2') matchesFilter = (unit === 'unit-2');
+        else if (currentFilter === 'unit-3') matchesFilter = (unit === 'unit-3');
+        else if (currentFilter === 'unit-4') matchesFilter = (unit === 'unit-4');
+        else if (currentFilter === 'unit-5') matchesFilter = (unit === 'unit-5');
+        else if (currentFilter === 'react') matchesFilter = (type === 'react');
+        else if (currentFilter === 'vanilla') matchesFilter = (type === 'vanilla');
+
+        if (matchesSearch && matchesFilter) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    searchInput.addEventListener('input', (e) => {
+      searchQuery = e.target.value.toLowerCase().trim();
+      filterCards();
+    });
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentFilter = btn.getAttribute('data-filter');
+        filterCards();
+      });
+    });
+
+    // Modal Live Preview Functions
+    const modal = document.getElementById('previewModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalIframe = document.getElementById('modalIframe');
+    const modalDirectLink = document.getElementById('modalDirectLink');
+    const modalWindow = document.getElementById('modalWindow');
+
+    function openPreview(url, title) {
+      modalTitle.textContent = title;
+      modalIframe.src = url;
+      modalDirectLink.href = url;
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closePreview() {
+      modal.classList.remove('active');
+      modalIframe.src = '';
+      document.body.style.overflow = 'auto';
+    }
+
+    function reloadPreview() {
+      const src = modalIframe.src;
+      modalIframe.src = '';
+      modalIframe.src = src;
+    }
+
+    function setModalView(view) {
+      modalWindow.classList.remove('view-tablet', 'view-mobile');
+      document.querySelectorAll('.view-btn').forEach(btn => {
+        if (['Desktop', 'Tablet', 'Mobile'].includes(btn.textContent)) {
+          btn.classList.remove('active');
+        }
+      });
+      if (view === 'tablet') {
+        modalWindow.classList.add('view-tablet');
+        event.currentTarget.classList.add('active');
+      } else if (view === 'mobile') {
+        modalWindow.classList.add('view-mobile');
+        event.currentTarget.classList.add('active');
+      } else {
+        event.currentTarget.classList.add('active');
+      }
+    }
+
+    // Close on backdrop click or Escape key
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closePreview();
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('active')) {
+        closePreview();
+      }
+      if (e.key === '/' && document.activeElement !== searchInput) {
+        e.preventDefault();
+        searchInput.focus();
+      }
+    });
+  </script>
+</body>
+</html>
