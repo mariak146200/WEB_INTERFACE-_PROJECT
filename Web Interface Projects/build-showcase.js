@@ -201,7 +201,7 @@ for (const p of projects) {
     // Check if node_modules exists, install if missing
     if (!fs.existsSync(path.join(fullProjPath, 'node_modules'))) {
       console.log(`   📦 Installing dependencies in ${p.dir}...`);
-      execSync('npm install --prefer-offline --no-audit --no-fund', {
+      execSync('npm install --prefer-offline --no-audit --no-fund --legacy-peer-deps', {
         cwd: fullProjPath,
         stdio: 'inherit'
       });

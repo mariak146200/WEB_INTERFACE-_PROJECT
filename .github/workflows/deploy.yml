@@ -24,14 +24,18 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js 20
+      - name: Setup Node.js 22
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
 
       - name: Build All 10 Projects & Showcase Portal
         run: |
-          node "Web Interface Projects/build-showcase.js" || node "./build-showcase.js"
+          if [ -f "Web Interface Projects/build-showcase.js" ]; then
+            node "Web Interface Projects/build-showcase.js"
+          else
+            node "./build-showcase.js"
+          fi
 
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v5
