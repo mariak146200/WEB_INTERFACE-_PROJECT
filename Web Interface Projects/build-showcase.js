@@ -48,7 +48,7 @@ const projects = [
   },
   {
     slug: 'unit-2-pro-1',
-    title: 'Developer Portfolio - Jai',
+    title: 'Developer Portfolio - MARIYAPPAN',
     unit: 'Unit 2: React Component Architecture',
     type: 'vite',
     dir: path.join('unit - 2 Project - 1', 'unit-2-pro-1')

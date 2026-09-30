@@ -21,7 +21,7 @@ All projects are integrated into a **Unified Showcase Hub** with real-time searc
 | :--- | :--- | :--- | :--- | :--- |
 | **Unit 1** | **Project 1: Interactive Counter** | HTML5, CSS3, Vanilla JS | Stateful increment, decrement, reset with color feedback | `projects/unit-1-pro-1/` |
 | **Unit 1** | **Project 2: Student Profile Card** | HTML5, CSS3, DOM API | Automated grading engine (A/B/C/F) & dynamic card display | `projects/unit-1-pro-2/` |
-| **Unit 2** | **Project 1: Developer Portfolio (Jai)** | React 19, Vite, Modular CSS | Decomposed component hierarchy, skill badges, contact flow | `projects/unit-2-pro-1/` |
+| **Unit 2** | **Project 1: Developer Portfolio (MARIYAPPAN)** | React 19, Vite, Modular CSS | Decomposed component hierarchy, skill badges, contact flow | `projects/unit-2-pro-1/` |
 | **Unit 2** | **Project 2: Hobby Explorer & Gallery** | React 19, Vite, Grid UI | Dynamic media grid for Photography, Music, Travel, Cooking | `projects/unit-2-pro-2/` |
 | **Unit 3** | **Project 1: Responsive Calculator** | React 19, `useState`, CSS | Arithmetic operation chaining, clear, decimal precision | `projects/unit-3-pro-1/` |
 | **Unit 3** | **Project 2: Student Attendance Tracker**| React 19, State Arrays | 20-student roll call, real-time present/absent stats toggle | `projects/unit-3-pro-2/` |
